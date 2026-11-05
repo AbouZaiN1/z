@@ -14,7 +14,79 @@ var STORE_KEY = "afterglow.choice";
 var form = document.getElementById("pick");
 var autoBox = document.getElementById("auto");
 var countEl = document.getElementById("count");
+var cacheEl = document.getElementById("cache");
 var ticker = null;
+var waitingForCache = false;
+var cacheTimer = null;
+var gone = false;
+
+/* How long the start may wait for the cache before it goes anyway.
+ *
+ * With no route the manifest check does not fail fast -- it sits on a
+ * network timeout, measured at 20-30 s on a console, and the page said
+ * "waiting for the cache" the whole time. Offline use is a first-class
+ * case here, not an edge case: the files are already on disk, and a run
+ * from them is exactly as good. So the wait is a courtesy with an upper
+ * bound, never a gate. */
+var CACHE_WAIT_MS = 4000;
+
+/* The offline cache, and the one state that must not be run through.
+ *
+ * While the manifest is being checked or fetched, some modules are the ones
+ * the page loaded with and some are not yet on disk -- starting there can mix
+ * two builds. Every other state is fine to start from: IDLE is cached and
+ * current, UNCACHED means no cache at all (which works as long as the server
+ * answers), and a browser with no Application Cache at all -- every desktop
+ * browser since Chrome 95 -- must obviously still be able to start.
+ *
+ * So this blocks on CHECKING and DOWNLOADING and nothing else. The inverse,
+ * passing only on IDLE, leaves the button dead wherever the cache is absent.
+ *
+ * The idea is titotryh-ux's, from Fewi-PS4 911e08a. */
+var appCache = (function () {
+  try { return window.applicationCache || null; } catch (e) { return null; }
+})();
+
+function cacheBusy() {
+  if (!appCache) return false;
+  try {
+    return appCache.status === appCache.CHECKING
+        || appCache.status === appCache.DOWNLOADING;
+  } catch (e) {
+    return false;
+  }
+}
+
+function cacheNote() {
+  if (!cacheEl) return;
+  if (!appCache) { cacheEl.textContent = ""; return; }
+  var text = "";
+  try {
+    if (appCache.status === appCache.CHECKING) text = "checking for updates";
+    else if (appCache.status === appCache.DOWNLOADING) text = "loading files - hold on";
+    else if (appCache.status === appCache.UPDATEREADY) text = "a newer version is cached - reopen this page to use it";
+    else if (appCache.status === appCache.OBSOLETE) text = "the cache was dropped - the server answers directly";
+  } catch (e) {}
+  cacheEl.textContent = text;
+}
+
+function cacheChanged() {
+  cacheNote();
+  /* Someone pressed start while the files were still coming down. Go now
+     that they are here, rather than making them press again. */
+  if (waitingForCache && !cacheBusy()) {
+    waitingForCache = false;
+    start();
+  }
+}
+
+if (appCache) {
+  var events = ["checking", "downloading", "progress", "cached", "noupdate",
+                "updateready", "error", "obsolete"];
+  for (var e = 0; e < events.length; e++) {
+    try { appCache.addEventListener(events[e], cacheChanged, false); } catch (err) {}
+  }
+}
 
 /* The choice is remembered in localStorage, not by any HTTP cache: cache
    headers decide whether a file is fetched again, never what the page
@@ -50,9 +122,35 @@ function picked() {
   return radio ? radio.value : "goldhen";
 }
 
+function go() {
+  if (gone) return;
+  gone = true;
+  if (cacheTimer !== null) { clearTimeout(cacheTimer); cacheTimer = null; }
+  location.href = "jb.html?" + TARGET[picked()];
+}
+
+function offline() {
+  try { return navigator.onLine === false; } catch (e) { return false; }
+}
+
 function start() {
   stopClock();
-  location.href = "jb.html?" + TARGET[picked()];
+  /* Not a refusal -- a bounded wait. The run begins by itself once the files
+     are in, and at the latest after CACHE_WAIT_MS. Offline it does not wait
+     at all: there is nothing to wait for. */
+  if (!offline() && cacheBusy()) {
+    waitingForCache = true;
+    countEl.textContent = "waiting for the cache";
+    cacheNote();
+    if (cacheTimer === null) {
+      cacheTimer = setTimeout(function () {
+        cacheTimer = null;
+        if (!gone) { countEl.textContent = "cache did not answer - going anyway"; go(); }
+      }, CACHE_WAIT_MS);
+    }
+    return;
+  }
+  go();
 }
 
 function stopClock() {
@@ -96,19 +194,6 @@ form.addEventListener("change", function (ev) {
   }
 });
 
-/* A run that reached the kernel swaps the address for this page and leaves
-   the marker behind (jb.js, at the end of the chain). Coming up on that
-   address means the browser restored a finished run, so the clock stays
-   stopped -- the choice is still restored and start still works, it just does
-   not go by itself. */
-var DONE = false;
-try {
-  DONE = new URLSearchParams(location.search).get("afterglow") === "done";
-} catch (e) {}
-
 restore();
-if (DONE) {
-  countEl.textContent = "kernel already patched - autostart held";
-} else if (autoBox.checked) {
-  startClock();
-}
+cacheNote();
+if (autoBox.checked) startClock();
