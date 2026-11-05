@@ -1,0 +1,1409 @@
+<!doctype html>
+<html class="landing" lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>أبوزين لخدمات البلايستيشن</title>
+    <!-- استدعاء خط عربي أصيل وعريق من جوجل (Amiri) ليعطي طابعا تراثيا فخما -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,700&family=Cinzel:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ستايل الزرار بخط عتيق ولون الذهب العتيق الواضح والكبير */
+      .matrix-sub-btn {
+        display: block;
+        width: 100%;
+        margin-top: 14px;
+        padding: 0.85em 1.2em;
+        border: 2px solid #d4af37; /* إطار بلون الذهب العتيق */
+        border-radius: 8px;
+        background: rgba(30, 25, 10, 0.85); /* خلفية داكنة متناسقة تبرز الذهب */
+        color: #f3e5ab; /* لون اللوز الذهبي العتيق والمضيء */
+        font-family: 'Amiri', serif; /* خط عربي عتيق وعريق */
+        font-size: 19px; /* حجم كبير وواضح جداً */
+        font-weight: 700;
+        line-height: 1.5;
+        text-align: center;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 0 0 18px rgba(212, 175, 55, 0.4); /* وهج ذهبي فخم */
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); /* ظل للنص لزيادة الوضوح والبروز */
+        transition: all 0.3s ease;
+      }
+      .matrix-sub-btn:hover {
+        background: #d4af37;
+        color: #000000;
+        box-shadow: 0 0 25px rgba(212, 175, 55, 0.8);
+        border-color: #fff;
+        transform: translateY(-2px);
+      }
+
+      /* Golden Core UI palette: replace the old green accents without
+         changing layout, controls, form behavior, or exploit scripts. */
+      .panel {
+        border-color: rgba(212, 175, 55, 0.38);
+        background: rgba(12, 9, 4, 0.78);
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.78),
+                    0 0 22px rgba(201, 149, 12, 0.10),
+                    inset 0 1px 0 rgba(255, 225, 150, 0.06);
+      }
+      .lede {
+        color: #e8c76a;
+        text-shadow: 0 0 9px rgba(212, 175, 55, 0.24);
+      }
+      .opt, .opt-auto {
+        border: 1px solid rgba(201, 149, 12, 0.34);
+        border-radius: 8px;
+        background: linear-gradient(135deg, rgba(30, 23, 9, 0.78), rgba(8, 7, 4, 0.82));
+        box-shadow: inset 0 1px 0 rgba(255, 225, 150, 0.035);
+        color: #d8c18a;
+      }
+      .opt:hover, .opt-auto:hover {
+        border-color: rgba(255, 215, 120, 0.72);
+        background: linear-gradient(135deg, rgba(65, 46, 12, 0.58), rgba(15, 11, 5, 0.9));
+        box-shadow: 0 0 13px rgba(212, 175, 55, 0.13),
+                    inset 0 0 12px rgba(212, 175, 55, 0.045);
+      }
+      .opt input, .opt-auto input {
+        accent-color: #d4af37;
+      }
+      .opt span, .opt-auto span {
+        color: #f0e2bd;
+      }
+      .btn {
+        border: 1px solid #c99b2e;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #8f6816 0%, #d4af37 48%, #9b711b 100%);
+        color: #160f02;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        box-shadow: 0 4px 18px rgba(201, 149, 12, 0.22),
+                    inset 0 1px 0 rgba(255, 244, 214, 0.42);
+        text-shadow: 0 1px 0 rgba(255, 235, 175, 0.22);
+      }
+      .btn:hover, .btn:focus {
+        background: linear-gradient(135deg, #f5dc8a 0%, #d4af37 52%, #b8860b 100%);
+        color: #090601;
+        border-color: #f7df98;
+        box-shadow: 0 0 24px rgba(255, 204, 51, 0.38),
+                    inset 0 1px 0 rgba(255, 255, 235, 0.55);
+        outline: none;
+      }
+      .count {
+        color: #d8b85a;
+      }
+
+      /* Correct Golden Core stacking: canvases are background layers,
+         never normal-flow elements that push the page content downward. */
+      html, body {
+        min-height: 100%;
+        background: #030200;
+      }
+      #rain, #core {
+        position: fixed;
+        inset: 0;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        max-width: none;
+        pointer-events: none;
+      }
+      #rain { z-index: 0; }
+      #core { z-index: 1; }
+
+      #brand {
+        position: relative;
+        z-index: 4;
+        background: rgba(8, 6, 2, 0.72);
+        border-bottom-color: rgba(212, 175, 55, 0.25);
+      }
+      #brand b {
+        color: #e5c15b;
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.32);
+      }
+      /* Keep the Golden Core unobstructed and dock the controls beside it. */
+      .shell {
+        position: fixed;
+        inset: 45px 0 0;
+        z-index: 3;
+        display: block;
+        min-height: 0;
+        padding: 0;
+        pointer-events: none;
+      }
+      .panel {
+        position: absolute;
+        top: 50%;
+        right: clamp(18px, 4.5vw, 76px);
+        transform: translateY(-50%);
+        width: min(310px, 28vw);
+        max-height: calc(100vh - 100px);
+        overflow-y: auto;
+        padding: 21px;
+        border: 1px solid rgba(226, 185, 75, 0.58);
+        border-radius: 16px;
+        background: linear-gradient(145deg, rgba(25, 18, 5, 0.91), rgba(5, 4, 2, 0.88));
+        box-shadow: 0 18px 48px rgba(0, 0, 0, 0.62),
+                    0 0 26px rgba(212, 175, 55, 0.17),
+                    inset 0 1px 0 rgba(255, 230, 160, 0.13);
+        backdrop-filter: blur(12px);
+        pointer-events: auto;
+      }
+      .panel::before {
+        content: "";
+        display: block;
+        width: 54px;
+        height: 3px;
+        margin: -2px auto 15px;
+        border-radius: 99px;
+        background: linear-gradient(90deg, transparent, #e4bd57, transparent);
+        box-shadow: 0 0 12px rgba(228, 189, 87, 0.55);
+      }
+      .lede {
+        margin-bottom: 1.1em;
+        font-size: 13px;
+      }
+      .pick {
+        display: grid;
+        gap: 9px;
+      }
+      .opt, .opt-auto {
+        margin: 0;
+        padding: 11px 13px;
+      }
+      .btn {
+        margin-top: 4px;
+        padding: 0.95em 1.2em;
+      }
+      .matrix-sub-btn {
+        margin-top: 5px;
+        font-size: 16px;
+      }
+      .meme {
+        position: absolute;
+        top: 50%;
+        left: clamp(18px, 5vw, 82px);
+        transform: translateY(-50%);
+        width: min(210px, 22vw);
+        max-width: 24vw;
+        z-index: 3;
+        pointer-events: auto;
+      }
+      .golden-mark {
+        position: fixed;
+        z-index: 3;
+        left: 50%;
+        bottom: 8vh;
+        transform: translateX(-50%);
+        padding: 0.45em 1.1em;
+        border: 1px solid rgba(255, 204, 51, 0.35);
+        border-radius: 4px;
+        background: rgba(10, 6, 0, 0.42);
+        color: #ffcc33;
+        font: 12px/1.4 Consolas, "Courier New", monospace;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        backdrop-filter: blur(2px);
+        pointer-events: none;
+      }
+      .byline {
+        z-index: 5;
+        color: rgba(216, 184, 90, 0.72);
+      }
+      @media (max-width: 700px) {
+        .shell {
+          inset: 42px 0 0;
+        }
+        .panel {
+          top: auto;
+          right: 12px;
+          bottom: 14px;
+          transform: none;
+          width: min(270px, calc(100vw - 24px));
+          max-height: 44vh;
+          padding: 14px;
+          border-radius: 13px;
+        }
+        .panel::before {
+          margin-bottom: 9px;
+        }
+        .lede {
+          margin-bottom: 0.75em;
+          font-size: 11px;
+        }
+        .opt, .opt-auto {
+          padding: 8px 10px;
+          font-size: 12px;
+        }
+        .btn {
+          padding: 0.78em 1em;
+        }
+        .matrix-sub-btn {
+          padding: 0.55em 0.8em;
+          font-size: 13px;
+          line-height: 1.35;
+        }
+        .meme {
+          top: 43%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: min(150px, 40vw);
+          max-width: 40vw;
+        }
+        .golden-mark {
+          bottom: calc(44vh + 22px);
+          font-size: 9px;
+        }
+      }
+
+      /* Final clean composition: controls float freely; only the service
+         statement gets its own wide gold frame below the core. */
+      html, body {
+        width: 100%;
+        min-height: 100%;
+        overflow: hidden;
+        scrollbar-width: none;
+      }
+      body::-webkit-scrollbar,
+      html::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+      }
+      .shell {
+        position: fixed;
+        inset: 45px 0 0;
+        z-index: 4;
+        pointer-events: none;
+      }
+      .panel {
+        position: absolute;
+        top: 46%;
+        right: clamp(24px, 5vw, 90px);
+        transform: translateY(-50%);
+        width: min(330px, 30vw);
+        max-height: none;
+        overflow: visible;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        pointer-events: auto;
+      }
+      .panel::before {
+        display: none;
+        content: none;
+      }
+      .lede {
+        margin: 0 0 20px;
+        color: #f2d47b;
+        font-size: clamp(17px, 1.45vw, 21px);
+        line-height: 1.5;
+        font-weight: 700;
+        text-shadow: 0 0 12px rgba(226, 185, 75, 0.38);
+        text-align: center;
+      }
+      .pick {
+        display: grid;
+        gap: 13px;
+        overflow: visible;
+      }
+      .opt, .opt-auto {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        margin: 0;
+        padding: 12px 15px;
+        border: 1px solid rgba(220, 179, 75, 0.48);
+        border-radius: 9px;
+        background: rgba(8, 6, 2, 0.28);
+        color: #f4e6bd;
+        font-size: clamp(16px, 1.3vw, 19px);
+        line-height: 1.45;
+        box-shadow: 0 0 12px rgba(212, 175, 55, 0.08);
+      }
+      .opt span, .opt-auto span {
+        color: #fff0c5;
+        font-size: inherit;
+        font-weight: 700;
+        text-shadow: 0 1px 5px #000, 0 0 8px rgba(212, 175, 55, 0.22);
+      }
+      .opt input, .opt-auto input {
+        width: 19px;
+        height: 19px;
+        flex: 0 0 19px;
+        accent-color: #e0b83f;
+      }
+      .btn {
+        min-height: 48px;
+        margin-top: 2px;
+        padding: 10px 22px;
+        border: 1px solid #f1d47a;
+        border-radius: 9px;
+        background: linear-gradient(135deg, #a87916, #f0d477 52%, #a87916);
+        color: #130d02;
+        font-size: 19px;
+        font-weight: 900;
+        letter-spacing: 0.13em;
+        box-shadow: 0 5px 22px rgba(212, 175, 55, 0.22);
+      }
+      .count {
+        margin: 0;
+        color: #f0d477;
+        font-size: 16px;
+        text-shadow: 0 1px 5px #000;
+      }
+      .matrix-sub-btn {
+        position: fixed;
+        z-index: 6;
+        left: 50%;
+        bottom: clamp(24px, 6vh, 58px);
+        transform: translateX(-50%);
+        display: block;
+        width: max-content;
+        max-width: min(94vw, 1100px);
+        margin: 0;
+        padding: 15px 34px;
+        border: 2px solid rgba(239, 202, 103, 0.9);
+        border-radius: 13px;
+        background: linear-gradient(100deg, rgba(24, 16, 3, 0.9), rgba(75, 52, 10, 0.86), rgba(24, 16, 3, 0.9));
+        color: #ffe7a0;
+        font-family: 'Amiri', serif;
+        font-size: clamp(19px, 1.7vw, 25px);
+        font-weight: 700;
+        line-height: 1.5;
+        text-align: center;
+        text-decoration: none;
+        white-space: nowrap;
+        text-shadow: 0 2px 5px #000, 0 0 12px rgba(255, 207, 86, 0.35);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.48),
+                    0 0 22px rgba(212, 175, 55, 0.22),
+                    inset 0 1px 0 rgba(255, 238, 190, 0.18);
+        pointer-events: auto;
+      }
+      .matrix-sub-btn:hover {
+        transform: translateX(-50%) translateY(-2px);
+        border-color: #fff0b7;
+        background: linear-gradient(100deg, rgba(66, 46, 8, 0.95), rgba(145, 104, 19, 0.92), rgba(66, 46, 8, 0.95));
+        color: #fff5d7;
+      }
+      .golden-mark {
+        display: none;
+      }
+      .byline {
+        position: fixed;
+        z-index: 6;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        color: rgba(238, 205, 119, 0.9);
+        font-size: 15px;
+        text-shadow: 0 1px 6px #000;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+      @media (max-width: 700px) {
+        html, body {
+          overflow: hidden;
+        }
+        .shell {
+          inset: 42px 0 0;
+        }
+        .panel {
+          top: 20px;
+          right: 12px;
+          transform: none;
+          width: min(225px, 58vw);
+        }
+        .lede {
+          margin-bottom: 12px;
+          font-size: 15px;
+        }
+        .pick {
+          gap: 8px;
+        }
+        .opt, .opt-auto {
+          padding: 8px 9px;
+          gap: 7px;
+          font-size: 14px;
+        }
+        .opt input, .opt-auto input {
+          width: 16px;
+          height: 16px;
+          flex-basis: 16px;
+        }
+        .btn {
+          min-height: 42px;
+          padding: 8px 16px;
+          font-size: 17px;
+        }
+        .matrix-sub-btn {
+          bottom: 18px;
+          width: calc(100vw - 24px);
+          max-width: none;
+          padding: 10px 12px;
+          font-size: 16px;
+          line-height: 1.45;
+          white-space: normal;
+        }
+        .byline {
+          top: 8px;
+          font-size: 12px;
+        }
+      }
+
+
+      /* New visual canvas: independent background layer behind all controls. */
+      .meme { display: none !important; }
+      #stage {
+        position: fixed;
+        inset: 0;
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+      }
+      body {
+        background: #0a0603;
+      }
+      #brand, .shell, .byline {
+        position: relative;
+        z-index: 4;
+      }
+      .shell {
+        pointer-events: none;
+      }
+      .panel, .meme, .matrix-sub-btn {
+        position: relative;
+        z-index: 5;
+        pointer-events: auto;
+      }
+
+
+      /* Centered control dock beneath the animated ABOUZAIN emblem */
+      .shell {
+        position: fixed;
+        inset: 0;
+        z-index: 5;
+        min-height: 0;
+        padding: 0;
+        pointer-events: none;
+      }
+      .controls-cluster {
+        position: absolute;
+        left: 50%;
+        bottom: clamp(14px, 2.8vh, 26px);
+        transform: translateX(-50%);
+        z-index: 6;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 11px;
+        width: min(590px, 92vw);
+        padding: 14px 17px 15px;
+        border: 1px solid rgba(235, 195, 91, 0.76);
+        border-radius: 15px;
+        background: linear-gradient(135deg, rgba(48, 32, 7, 0.86), rgba(9, 7, 3, 0.91) 48%, rgba(43, 29, 7, 0.88));
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.58), 0 0 25px rgba(218, 171, 57, 0.2), inset 0 1px 0 rgba(255, 238, 185, 0.2);
+        backdrop-filter: blur(8px);
+        pointer-events: auto;
+      }
+      .controls-cluster::before {
+        content: "";
+        display: block;
+        width: 72px;
+        height: 2px;
+        justify-self: center;
+        margin: -2px 0 1px;
+        border-radius: 50%;
+        background: linear-gradient(90deg, transparent, #f3d27b, transparent);
+        box-shadow: 0 0 12px rgba(243, 210, 123, 0.62);
+      }
+      .panel {
+        position: static;
+        inset: auto;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        max-height: none;
+        overflow: visible;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+        backdrop-filter: none;
+        pointer-events: auto;
+      }
+      .panel::before { content: none; display: none; }
+      .lede {
+        margin: 0 0 8px;
+        color: #f0d58b;
+        font-size: 13px;
+        line-height: 1.35;
+        font-weight: 700;
+        text-align: center;
+        letter-spacing: 0.04em;
+        text-shadow: 0 0 10px rgba(226, 185, 75, 0.32);
+      }
+      .pick {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: stretch;
+        gap: 8px 10px;
+        margin: 0;
+        overflow: visible;
+      }
+      .opt, .opt-auto {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        min-width: 0;
+        min-height: 42px;
+        margin: 0;
+        padding: 8px 11px;
+        border: 1px solid rgba(226, 187, 91, 0.58);
+        border-radius: 9px;
+        background: linear-gradient(135deg, rgba(65, 47, 14, 0.68), rgba(11, 9, 5, 0.82));
+        color: #fff0c5;
+        font-size: clamp(14px, 1.2vw, 17px);
+        line-height: 1.3;
+        box-shadow: inset 0 1px 0 rgba(255, 236, 180, 0.1);
+        text-align: center;
+      }
+      .opt span, .opt-auto span {
+        color: #fff0c5;
+        font-size: inherit;
+        font-weight: 700;
+        text-shadow: 0 1px 5px #000, 0 0 8px rgba(212, 175, 55, 0.22);
+      }
+      .opt input, .opt-auto input {
+        flex: 0 0 17px;
+        width: 17px;
+        height: 17px;
+        margin: 0;
+        accent-color: #e3bc4f;
+      }
+      .btn {
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: min(220px, 100%);
+        min-height: 43px;
+        margin: 1px 0 0;
+        padding: 8px 22px;
+        border: 1px solid #f1d47a;
+        border-radius: 9px;
+        background: linear-gradient(110deg, #a87916, #f0d477 52%, #a87916);
+        color: #160f02;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+        box-shadow: 0 4px 17px rgba(212, 175, 55, 0.25), inset 0 1px 0 rgba(255, 248, 220, 0.48);
+        text-shadow: 0 1px 0 rgba(255, 235, 175, 0.3);
+      }
+      .btn:hover, .btn:focus {
+        background: linear-gradient(110deg, #f5dc8a, #d4af37 52%, #b8860b);
+        color: #090601;
+        border-color: #fff0b7;
+        box-shadow: 0 0 22px rgba(255, 204, 51, 0.35);
+        outline: none;
+      }
+      .count {
+        grid-column: 1 / -1;
+        margin: 0;
+        color: #efd17a;
+        font-size: 13px;
+        line-height: 1.2;
+        text-align: center;
+      }
+      .matrix-sub-btn {
+        position: static;
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 9px 13px;
+        border: 1px solid rgba(238, 202, 111, 0.75);
+        border-radius: 9px;
+        background: linear-gradient(100deg, rgba(20, 14, 3, 0.95), rgba(103, 73, 14, 0.83), rgba(20, 14, 3, 0.95));
+        color: #ffe9ad;
+        font-family: 'Amiri', serif;
+        font-size: clamp(16px, 1.45vw, 20px);
+        font-weight: 700;
+        line-height: 1.45;
+        text-align: center;
+        text-decoration: none;
+        white-space: normal;
+        text-shadow: 0 2px 5px #000, 0 0 10px rgba(255, 207, 86, 0.3);
+        box-shadow: inset 0 1px 0 rgba(255, 238, 190, 0.15);
+        transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+      }
+      .matrix-sub-btn:hover {
+        transform: none;
+        border-color: #fff0b7;
+        background: linear-gradient(100deg, rgba(66, 46, 8, 0.96), rgba(145, 104, 19, 0.93), rgba(66, 46, 8, 0.96));
+        color: #fff8df;
+      }
+      @media (max-width: 700px) {
+        .controls-cluster {
+          bottom: 10px;
+          width: min(560px, calc(100vw - 20px));
+          gap: 8px;
+          padding: 10px 11px 11px;
+          border-radius: 12px;
+        }
+        .controls-cluster::before { width: 54px; }
+        .lede { margin-bottom: 6px; font-size: 11px; }
+        .pick { gap: 6px 7px; }
+        .opt, .opt-auto {
+          min-height: 37px;
+          gap: 6px;
+          padding: 7px 6px;
+          font-size: 12px;
+        }
+        .opt input, .opt-auto input {
+          flex-basis: 15px;
+          width: 15px;
+          height: 15px;
+        }
+        .btn { min-height: 38px; font-size: 16px; }
+        .matrix-sub-btn { padding: 7px 9px; font-size: 14px; line-height: 1.35; }
+      }
+      @media (max-height: 650px) and (min-width: 701px) {
+        .controls-cluster { bottom: 8px; gap: 6px; padding: 8px 12px; }
+        .lede { margin-bottom: 4px; font-size: 11px; }
+        .pick { gap: 5px 8px; }
+        .opt, .opt-auto { min-height: 34px; padding: 5px 9px; font-size: 13px; }
+        .btn { min-height: 35px; padding: 5px 16px; font-size: 15px; }
+        .matrix-sub-btn { padding: 6px 10px; font-size: 15px; }
+      }
+
+    
+      /* Desktop: place GoldHEN, auto-download and Start side by side. */
+      @media (min-width: 701px) {
+        .controls-cluster {
+          width: min(950px, 86vw);
+          bottom: clamp(18px, 2.8vh, 26px);
+          gap: 9px;
+          padding: 12px 16px 13px;
+        }
+        .lede {
+          margin-bottom: 5px;
+          font-size: 12px;
+        }
+        .pick {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(120px, 0.82fr);
+          gap: 8px;
+          align-items: center;
+        }
+        .opt, .opt-auto {
+          min-height: 39px;
+          padding: 7px 9px;
+          font-size: 15px;
+        }
+        .btn {
+          grid-column: auto;
+          justify-self: stretch;
+          width: 100%;
+          min-height: 39px;
+          margin: 0;
+          padding: 7px 12px;
+          font-size: 17px;
+        }
+        .count {
+          grid-column: 1 / -1;
+        }
+        .matrix-sub-btn {
+          padding: 8px 12px;
+          font-size: 18px;
+        }
+      }
+      @media (max-width: 700px) {
+        .pick {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+        .btn {
+          grid-column: 1 / -1;
+          justify-self: center;
+          width: min(220px, 100%);
+        }
+      }
+
+    
+      /* Lock the service line inside the centered dock in every pointer state. */
+      .controls-cluster > a.matrix-sub-btn,
+      .controls-cluster > a.matrix-sub-btn:link,
+      .controls-cluster > a.matrix-sub-btn:visited,
+      .controls-cluster > a.matrix-sub-btn:hover,
+      .controls-cluster > a.matrix-sub-btn:focus,
+      .controls-cluster > a.matrix-sub-btn:active {
+        position: static !important;
+        inset: auto !important;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        transform: none !important;
+        display: block !important;
+        float: none !important;
+        clear: both !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        justify-self: stretch !important;
+        align-self: stretch !important;
+        text-align: center !important;
+        white-space: normal !important;
+        transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease !important;
+      }
+      .controls-cluster {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+      .controls-cluster > .panel,
+      .controls-cluster > a.matrix-sub-btn {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+      }
+      @media (max-width: 700px) {
+        .controls-cluster > a.matrix-sub-btn {
+          width: 100% !important;
+          max-width: 100% !important;
+          font-size: 14px !important;
+          padding: 7px 9px !important;
+        }
+      }
+
+    
+      /* Center the title and contact details in a clean, balanced header. */
+      #brand {
+        position: fixed !important;
+        top: 8px !important;
+        right: 0 !important;
+        bottom: auto !important;
+        left: 0 !important;
+        z-index: 12 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        width: 100% !important;
+        min-height: 34px;
+        margin: 0 !important;
+        padding: 3px 12px !important;
+        border: 0 !important;
+        background: transparent !important;
+        text-align: center !important;
+        direction: ltr !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+        pointer-events: none;
+      }
+      #brand b {
+        display: inline-block;
+        margin: 0 auto !important;
+        color: #f0d078 !important;
+        font-family: 'Cinzel', Georgia, serif;
+        font-size: clamp(18px, 2vw, 23px) !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.2em !important;
+        line-height: 1.25 !important;
+        text-align: center !important;
+        text-shadow: 0 0 8px rgba(238, 190, 75, 0.46), 0 0 20px rgba(212, 158, 38, 0.2) !important;
+      }
+      .byline {
+        position: fixed !important;
+        top: 48px !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        z-index: 12 !important;
+        display: inline-flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 12px !important;
+        width: max-content !important;
+        max-width: calc(100vw - 24px) !important;
+        margin: 0 !important;
+        padding: 6px 15px !important;
+        border: 1px solid rgba(218, 176, 75, 0.38);
+        border-radius: 999px;
+        background: rgba(10, 7, 2, 0.5);
+        color: #f1d58e !important;
+        font: 600 14px/1.4 "Segoe UI", Tahoma, sans-serif !important;
+        letter-spacing: 0.02em !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+        direction: rtl !important;
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 225, 150, 0.08);
+        pointer-events: auto !important;
+        box-sizing: border-box !important;
+      }
+      .byline-name {
+        color: #f7df9b;
+        line-height: 1;
+        text-shadow: 0 0 8px rgba(220, 177, 70, 0.3);
+      }
+      .whatsapp-contact {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 6px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        color: #e7bd55 !important;
+        font: 700 14px/1.2 Consolas, "DejaVu Sans Mono", monospace !important;
+        text-decoration: none !important;
+        white-space: nowrap !important;
+        text-shadow: 0 0 8px rgba(224, 178, 61, 0.3);
+        transition: color 0.2s ease, text-shadow 0.2s ease;
+      }
+      .whatsapp-contact:hover,
+      .whatsapp-contact:focus-visible {
+        color: #fff0bd !important;
+        text-shadow: 0 0 12px rgba(255, 214, 110, 0.62);
+        outline: none;
+      }
+      .whatsapp-gold-icon {
+        display: block;
+        flex: 0 0 19px;
+        width: 19px;
+        height: 19px;
+        color: currentColor;
+        filter: drop-shadow(0 0 4px rgba(231, 189, 85, 0.35));
+      }
+      @media (max-width: 700px) {
+        #brand {
+          top: 5px !important;
+          min-height: 28px;
+        }
+        #brand b {
+          font-size: 17px !important;
+          letter-spacing: 0.16em !important;
+        }
+        .byline {
+          top: 38px !important;
+          gap: 8px !important;
+          padding: 5px 11px !important;
+          font-size: 12px !important;
+        }
+        .whatsapp-contact {
+          font-size: 12px !important;
+        }
+        .whatsapp-gold-icon {
+          flex-basis: 17px;
+          width: 17px;
+          height: 17px;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <!-- New Pyramids / Sunrise / Wings visual layer -->
+    <canvas id="stage" aria-hidden="true"></canvas>
+
+    <!-- Every run starts from here. The referrer guard in jb.js arms the chain
+         only when it was reached from this page, so that a browser restoring
+         its last session cannot re-run it unattended. -->
+    <div id="brand"><b>Welcome To AbouZaiN World</b></div>
+
+    <div class="shell">
+
+      <!-- One centered control dock beneath the animated ABOUZAIN emblem. -->
+      <section class="controls-cluster" aria-label="خيارات التشغيل وخدمات أبوزين">
+        <main class="panel">
+          <p class="lede">PS4 kernel exploit &middot; firmware 14.00</p>
+          <form class="pick" id="pick">
+            <label class="opt">
+              <input type="radio" name="payload" value="goldhen" checked />
+              <span>GoldHEN</span>
+            </label>
+            <label class="opt opt-auto">
+              
+              <span>صل على النبي</span>
+            </label>
+            <button class="btn" type="submit">start</button>
+            <p class="count" id="count"></p>
+          </form>
+        </main>
+        <a href="#" class="matrix-sub-btn">ابوزين لصيانه الاجهزة والدراعات وتنزيل ألعاب البلايستيشن 4 و 5 العنوان : البحيرة / رشيد/ بجوار ميدان الساعه</a>
+      </section>
+    </div>
+
+    <div class="byline" aria-label="بيانات التواصل">
+      <span class="byline-name">أبوزيـــن</span>
+      <a class="whatsapp-contact" href="https://wa.me/201279227123" target="_blank" rel="noopener noreferrer" aria-label="تواصل مع أبوزين عبر واتساب">
+        <svg class="whatsapp-gold-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M20.1 3.9A11.35 11.35 0 0 0 2.2 17.2L1 22.5l5.4-1.4A11.35 11.35 0 0 0 20.1 3.9Z"
+                fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M8.2 7.1c-.3-.7-.7-.7-1-.7h-.8c-.3 0-.7.1-.9.5-.3.4-1.1 1.1-1.1 2.7s1.1 3.1 1.3 3.3c.2.2 2.1 3.3 5.1 4.5 2.5 1 3 .8 3.6.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.1-1.4-.1-.1-.3-.2-.7-.4l-2.1-1c-.3-.1-.5-.2-.7.2-.2.3-.8 1-1-1-.2-.2-.4-.2-.7-.1-.3.2-1.1.4-2.1-.5-.8-.7-1.3-1.6-1.5-1.9-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-.9-2.1Z"
+                fill="currentColor"/>
+        </svg>
+        <span dir="ltr">01279227123</span>
+      </a>
+    </div>
+
+    <!-- Pyramids, sunrise and wings visual effect; separate from exploit logic. -->
+    <script>
+(() => {
+  const canvas = document.getElementById('stage');
+  const ctx = canvas.getContext('2d');
+  const brandLogo = new Image();
+  brandLogo.src = 'abouzain-logo.png';
+  let W, H, dpr, CX, CY;
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    CX = W / 2;
+    CY = H * 0.46;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  const FONT_FAMILY = "'Cinzel', 'Times New Roman', serif";
+
+  function sampleAlphaPoints(drawFn, step) {
+    const off = document.createElement('canvas');
+    off.width = W; off.height = H;
+    const octx = off.getContext('2d');
+    drawFn(octx);
+    const img = octx.getImageData(0, 0, W, H).data;
+    const points = [];
+    for (let y = 0; y < H; y += step) {
+      for (let x = 0; x < W; x += step) {
+        if (img[(y * W + x) * 4 + 3] > 120) points.push({ x, y });
+      }
+    }
+    return points;
+  }
+
+  /* =======================================================================
+   * WING SHAPE: a fan of tapered feather "petals" radiating from a
+   * shoulder point, sweeping outward with the tip curling upward -- the
+   * classic winged-disk silhouette, built from basic bezier petals so it
+   * needs no external art.
+   * ===================================================================== */
+  function drawWing(octx, originX, originY, dir, u) {
+    const FEATHERS = 9;
+    for (let i = 0; i < FEATHERS; i++) {
+      const frac = i / (FEATHERS - 1);
+      const angleDeg = 8 + (-48 - 8) * frac;       // 8deg (inner, near level) to -48deg (outer, swept up)
+      const angle = angleDeg * Math.PI / 180;
+      const length = u * (0.95 + 1.85 * frac);
+      const width = u * (0.62 - 0.3 * frac);
+
+      const tipX = originX + dir * Math.cos(angle) * length;
+      const tipY = originY + Math.sin(angle) * length;
+
+      const perp = angle + Math.PI / 2;
+      const cx1 = (originX + tipX) / 2 + Math.cos(perp) * width * 0.5;
+      const cy1 = (originY + tipY) / 2 + Math.sin(perp) * width * 0.5;
+      const cx2 = (originX + tipX) / 2 - Math.cos(perp) * width * 0.5;
+      const cy2 = (originY + tipY) / 2 - Math.sin(perp) * width * 0.5;
+
+      octx.beginPath();
+      octx.moveTo(originX, originY);
+      octx.quadraticCurveTo(cx1, cy1, tipX, tipY);
+      octx.quadraticCurveTo(cx2, cy2, originX, originY);
+      octx.closePath();
+      octx.fill();
+    }
+  }
+
+  /* =======================================================================
+   * SAMPLING: pyramids, sun, the name, and its two wings
+   * ===================================================================== */
+  let pyramidPts = [];
+  let sunPts = [];
+  let sunRestCenter = { x: 0, y: 0 };
+  let sunHiddenY = 0;
+  let sunRadius = 0;
+  let nameWingPts = []; // { dx, dy } relative to the emblem center (CX, emblemCY)
+  let emblemCenter = { x: 0, y: 0 };
+
+  function buildTargets() {
+    const u = Math.min(W, H) * 0.1;
+    const baseY = CY + u * 1.1;
+
+    const pyramids = [
+      { cx: CX - u * 1.9, halfW: u * 0.95, height: u * 1.35 },
+      { cx: CX,           halfW: u * 1.35, height: u * 2.05 },
+      { cx: CX + u * 1.85, halfW: u * 0.7, height: u * 1.0 },
+    ];
+
+    const step = Math.max(2, Math.floor(u / 16));
+    pyramidPts = sampleAlphaPoints(octx => {
+      octx.fillStyle = '#fff';
+      for (const p of pyramids) {
+        octx.beginPath();
+        octx.moveTo(p.cx - p.halfW, baseY);
+        octx.lineTo(p.cx + p.halfW, baseY);
+        octx.lineTo(p.cx, baseY - p.height);
+        octx.closePath();
+        octx.fill();
+      }
+    }, step);
+
+    // --- sun: sampled once at its RESTING (fully risen) position; the
+    // rise/set cycle just moves this whole point cloud up and down later
+    sunRadius = u * 0.85;
+    sunRestCenter = { x: CX, y: baseY - pyramids[1].height - sunRadius * 1.5 };
+    sunHiddenY = baseY - sunRadius * 0.15;
+
+    const sunStep = Math.max(2, Math.floor(sunRadius / 24));
+    const rawSun = sampleAlphaPoints(octx => {
+      octx.fillStyle = '#fff';
+      octx.beginPath();
+      octx.arc(sunRestCenter.x, sunRestCenter.y, sunRadius, 0, Math.PI * 2);
+      octx.fill();
+    }, sunStep);
+    sunPts = rawSun.map(p => ({ dx: p.x - sunRestCenter.x, dy: p.y - sunRestCenter.y }));
+
+    // --- the name, below the pyramids, flanked by two wings ---------------
+    const nameFontSize = u * 1.05;
+    const nameY = baseY + u * 1.0;
+
+    // measure the name first so the wings know where its edges are
+    const measureCanvas = document.createElement('canvas');
+    const mctx = measureCanvas.getContext('2d');
+    mctx.font = `700 ${nameFontSize}px ${FONT_FAMILY}`;
+    const nameHalfWidth = mctx.measureText('ABOUZAIN').width / 2;
+
+    emblemCenter = { x: CX, y: nameY };
+
+    const nameStep = Math.max(2, Math.floor(nameFontSize / 60));
+    const rawShape = sampleAlphaPoints(octx => {
+      octx.fillStyle = '#fff';
+
+      // the name itself
+      octx.font = `700 ${nameFontSize}px ${FONT_FAMILY}`;
+      octx.textAlign = 'center';
+      octx.textBaseline = 'middle';
+      octx.fillText('ABOUZAIN', CX, nameY);
+
+      // two mirrored wings, shoulders just outside the name's edges
+      const shoulderGap = u * 0.25;
+      drawWing(octx, CX + nameHalfWidth + shoulderGap, nameY - u * 0.1, 1, u);
+      drawWing(octx, CX - nameHalfWidth - shoulderGap, nameY - u * 0.1, -1, u);
+    }, nameStep);
+
+    nameWingPts = rawShape.map(p => ({ dx: p.x - emblemCenter.x, dy: p.y - emblemCenter.y }));
+  }
+
+  /* =======================================================================
+   * GRAINS
+   * ===================================================================== */
+  let grains = [];
+  let dust = [];
+  let stars = [];
+  let startTime = 0;
+  let settled = false;
+  let settleTime = 0;
+
+  const VORTEX_DURATION = 1.5;
+  const SETTLE_DURATION = 1.25;
+  const MAX_PEEL_DELAY = 1.0;
+
+  function vortexFields() {
+    return {
+      vortexRadius: 100 + Math.random() * Math.min(W, H) * 0.45,
+      vortexAngle: Math.random() * Math.PI * 2,
+      vortexSpeed: (0.6 + Math.random() * 1.0) * (Math.random() < 0.5 ? 1 : -1),
+      peelDelay: Math.random() * MAX_PEEL_DELAY,
+    };
+  }
+
+  function buildGrains() {
+    const pyramidGrains = pyramidPts.map(p => ({
+      kind: 'pyramid', baseX: p.x, baseY: p.y,
+      ...vortexFields(), size: 1.0 + Math.random() * 1.5, hueShift: Math.random(),
+    }));
+
+    const sunGrains = sunPts.map(p => ({
+      kind: 'sun', dx: p.dx, dy: p.dy,
+      ...vortexFields(), size: 1.0 + Math.random() * 1.6, hueShift: Math.random(),
+    }));
+
+    const emblemGrains = nameWingPts.map(p => ({
+      kind: 'emblem', dx: p.dx, dy: p.dy,
+      ...vortexFields(), size: 0.9 + Math.random() * 1.3, hueShift: Math.random(),
+    }));
+
+    grains = pyramidGrains.concat(sunGrains, emblemGrains);
+  }
+
+  function buildDust(count) {
+    dust = Array.from({ length: count }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 6, vy: (Math.random() - 0.5) * 6,
+      size: 0.5 + Math.random() * 1.1,
+      alpha: 0.07 + Math.random() * 0.12,
+    }));
+    stars = Array.from({ length: Math.max(90, Math.floor(W * H / 11000)) }, () => ({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      size: 0.35 + Math.random() * 1.25,
+      phase: Math.random() * Math.PI * 2,
+      speed: 0.35 + Math.random() * 1.2,
+      alpha: 0.18 + Math.random() * 0.62,
+    }));
+  }
+
+  /* Golden cosmic sky: soft nebula clouds, a warm atmospheric halo and
+     delicate radial rays behind the pyramids. Decorative only. */
+  function drawGoldenSky(t) {
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+
+    const halo = ctx.createRadialGradient(
+      sunRestCenter.x, sunRestCenter.y, 2,
+      sunRestCenter.x, sunRestCenter.y, Math.max(W, H) * 0.56
+    );
+    halo.addColorStop(0, 'rgba(255, 174, 48, 0.24)');
+    halo.addColorStop(0.22, 'rgba(181, 105, 24, 0.13)');
+    halo.addColorStop(0.58, 'rgba(89, 49, 13, 0.075)');
+    halo.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = halo;
+    ctx.fillRect(0, 0, W, H);
+
+    const cloudSpots = [
+      [0.18, 0.48, 0.31, 0.19], [0.80, 0.48, 0.34, 0.20],
+      [0.30, 0.72, 0.25, 0.16], [0.72, 0.73, 0.27, 0.17],
+      [0.50, 0.30, 0.25, 0.15]
+    ];
+    for (let i = 0; i < cloudSpots.length; i++) {
+      const [px, py, rx, ry] = cloudSpots[i];
+      const drift = Math.sin(t * 0.11 + i * 1.7) * 10;
+      const x = W * px + drift;
+      const y = H * py;
+      const radius = Math.max(W * rx, H * ry);
+      const mist = ctx.createRadialGradient(x, y, 0, x, y, radius);
+      mist.addColorStop(0, 'rgba(202, 119, 31, 0.075)');
+      mist.addColorStop(0.48, 'rgba(139, 78, 23, 0.035)');
+      mist.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = mist;
+      ctx.fillRect(x - radius, y - radius, radius * 2, radius * 2);
+    }
+
+    // Fine sunburst rays, kept subtle so the logo and pyramid silhouettes stay clear.
+    ctx.translate(sunRestCenter.x, sunRestCenter.y);
+    const rayCount = 54;
+    for (let i = 0; i < rayCount; i++) {
+      const angle = (Math.PI * 2 * i / rayCount) + Math.sin(t * 0.18 + i) * 0.012;
+      const inner = sunRadius * 0.92;
+      const outer = Math.max(W, H) * (0.38 + (i % 4) * 0.035);
+      const shimmer = 0.025 + (0.5 + 0.5 * Math.sin(t * 0.8 + i * 1.9)) * 0.035;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(angle) * inner, Math.sin(angle) * inner);
+      ctx.lineTo(Math.cos(angle) * outer, Math.sin(angle) * outer);
+      ctx.strokeStyle = `rgba(255, 190, 82, ${shimmer})`;
+      ctx.lineWidth = i % 6 === 0 ? 1.35 : 0.65;
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    // Tiny distant stars with a slow natural twinkle.
+    ctx.save();
+    ctx.globalCompositeOperation = 'screen';
+    for (const s of stars) {
+      const a = s.alpha * (0.58 + 0.42 * Math.sin(t * s.speed + s.phase));
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255, 205, 112, ${a})`;
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function easeOutCubic(x) { return 1 - Math.pow(1 - x, 3); }
+  function easeInCubic(x) { return x * x * x; }
+  function easeInOutCubic(x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
+
+  function pyramidColor(hueShift, alpha) {
+    const r = Math.round(170 + hueShift * 60), g = Math.round(120 + hueShift * 70), b = Math.round(60 + hueShift * 50);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  function sunColor(hueShift, alpha) {
+    const r = Math.round(235 + hueShift * 20), g = Math.round(140 + hueShift * 90), b = Math.round(30 + hueShift * 60);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  function emblemColor(hueShift, alpha) {
+    const r = Math.round(210 + hueShift * 45), g = Math.round(165 + hueShift * 80), b = Math.round(60 + hueShift * 85);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+
+  /* =======================================================================
+   * SUNRISE CYCLE: rise -> arrival pulse -> hold -> set -> pause -> repeat.
+   * Driven purely by (elapsed time mod cycle length), so it loops forever
+   * with no state flags to desync.
+   * ===================================================================== */
+  const RISE = 6.5, PULSE = 1.1, HOLD = 9, SET = 5, PAUSE = 1.5;
+  const CYCLE_TOTAL = RISE + HOLD + SET + PAUSE;
+
+  function sunPhase(cycleT) {
+    if (cycleT < RISE) {
+      const p = easeOutCubic(cycleT / RISE);
+      return { y: sunHiddenY + (sunRestCenter.y - sunHiddenY) * p, visible: p, pulseBoost: 0 };
+    }
+    const afterRise = cycleT - RISE;
+    const pulseBoost = afterRise < PULSE ? (1 - afterRise / PULSE) : 0;
+    if (afterRise < HOLD) {
+      return { y: sunRestCenter.y, visible: 1, pulseBoost };
+    }
+    const settingT = afterRise - HOLD;
+    if (settingT < SET) {
+      const p = easeInCubic(settingT / SET);
+      return { y: sunRestCenter.y + (sunHiddenY - sunRestCenter.y) * p, visible: 1 - p, pulseBoost: 0 };
+    }
+    return { y: sunHiddenY, visible: 0, pulseBoost: 0 };
+  }
+
+  /* =======================================================================
+   * RENDER
+   * ===================================================================== */
+  function draw(now) {
+    const t = (now - startTime) / 1000;
+
+    ctx.fillStyle = 'rgba(10, 6, 3, 0.16)';
+    ctx.fillRect(0, 0, W, H);
+    drawGoldenSky(t);
+
+    for (const d of dust) {
+      d.x += d.vx * 0.016; d.y += d.vy * 0.016;
+      if (d.x < 0) d.x += W; if (d.x > W) d.x -= W;
+      if (d.y < 0) d.y += H; if (d.y > H) d.y -= H;
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(230, 190, 120, ${d.alpha})`;
+      ctx.arc(d.x, d.y, d.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    const cycleT = settled ? (t - settleTime) % CYCLE_TOTAL : 0;
+    const sun = sunPhase(cycleT);
+    const sunBreath = Math.sin(t * 1.3) * 0.06;
+    const sunScale = 1 + sunBreath + sun.pulseBoost * 0.4;
+    const sunAlphaScale = clamp(sun.visible, 0.12, 1);
+
+    const namePulse = 1 + Math.sin(t * 1.6) * 0.05;
+
+    let allSettled = true;
+
+    for (const g of grains) {
+      let x, y, alpha, size = g.size, colorFn = pyramidColor;
+      const peelStart = VORTEX_DURATION + g.peelDelay;
+
+      if (t < peelStart) {
+        const angle = g.vortexAngle + g.vortexSpeed * t;
+        const wob = g.vortexRadius * (1 - 0.15 * Math.sin(t * 2 + g.vortexAngle));
+        x = CX + Math.cos(angle) * wob;
+        y = CY + Math.sin(angle) * wob * 0.55;
+        alpha = 0.5;
+        allSettled = false;
+      } else {
+        const localT = Math.min(1, (t - peelStart) / SETTLE_DURATION);
+        if (localT < 1) allSettled = false;
+        const eased = easeInOutCubic(localT);
+
+        let tx, ty, alphaMul = 1;
+        if (g.kind === 'pyramid') {
+          tx = g.baseX; ty = g.baseY; colorFn = pyramidColor;
+        } else if (g.kind === 'sun') {
+          tx = sunRestCenter.x + g.dx * sunScale;
+          ty = sun.y + g.dy * sunScale;
+          colorFn = sunColor;
+          alphaMul = sunAlphaScale;
+          size = g.size * (1 + sun.pulseBoost * 0.5);
+        } else {
+          tx = emblemCenter.x + g.dx * namePulse;
+          ty = emblemCenter.y + g.dy * namePulse;
+          colorFn = emblemColor;
+        }
+
+        const vortexAngleAtPeel = g.vortexAngle + g.vortexSpeed * peelStart;
+        const curAngle = vortexAngleAtPeel + g.vortexSpeed * localT * (1 - eased) * 2;
+        const curRadius = g.vortexRadius * (1 - eased);
+        const vx = CX + Math.cos(curAngle) * curRadius;
+        const vy = CY + Math.sin(curAngle) * curRadius * 0.55;
+
+        x = vx + (tx - vx) * eased;
+        y = vy + (ty - vy) * eased;
+        alpha = (0.5 + eased * 0.5) * alphaMul;
+      }
+
+      ctx.beginPath();
+      ctx.fillStyle = colorFn(g.hueShift, alpha);
+      ctx.arc(x, y, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // The transparent AbouZain emblem rides the same sunrise curve as the old sun.
+    // The original particle disc remains underneath it to preserve the animated golden core.
+    if (brandLogo.complete && brandLogo.naturalWidth > 0 && sun.visible > 0.005) {
+      const logoSize = sunRadius * 2.18 * sunScale;
+      ctx.save();
+      ctx.globalAlpha = clamp(sun.visible, 0, 1);
+      ctx.shadowColor = 'rgba(255, 173, 42, 0.88)';
+      ctx.shadowBlur = 24 + sun.pulseBoost * 28;
+      ctx.drawImage(brandLogo, sunRestCenter.x - logoSize / 2, sun.y - logoSize / 2, logoSize, logoSize);
+      ctx.restore();
+    }
+
+    if (allSettled && !settled) { settled = true; settleTime = t; }
+
+    if (settled) {
+      const glowT = Math.min(1, (t - settleTime) / 1.2);
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      const sunGlowStrength = (0.22 + sun.pulseBoost * 0.55) * sunAlphaScale * glowT;
+      const grad = ctx.createRadialGradient(sunRestCenter.x, sun.y, 0, sunRestCenter.x, sun.y, Math.max(W, H) * 0.3);
+      grad.addColorStop(0, `rgba(255, 170, 60, ${sunGlowStrength})`);
+      grad.addColorStop(1, 'rgba(255, 170, 60, 0)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      const nameGlow = ctx.createRadialGradient(emblemCenter.x, emblemCenter.y, 0, emblemCenter.x, emblemCenter.y, Math.max(W, H) * 0.22);
+      nameGlow.addColorStop(0, `rgba(230, 180, 90, ${0.1 * glowT})`);
+      nameGlow.addColorStop(1, 'rgba(230, 180, 90, 0)');
+      ctx.fillStyle = nameGlow;
+      ctx.fillRect(0, 0, W, H);
+      ctx.restore();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  function start() {
+    ctx.fillStyle = '#0a0603';
+    ctx.fillRect(0, 0, W, H);
+    buildTargets();
+    buildGrains();
+    buildDust(150);
+    settled = false;
+    startTime = performance.now();
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { resize(); start(); });
+  resize();
+  start();
+})();
+    </script>
+        <script src="launch.js"></script>
+  </body>
+</html>
